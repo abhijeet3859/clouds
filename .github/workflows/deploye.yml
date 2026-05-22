@@ -2,8 +2,7 @@ name: Deploy Static Website
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
@@ -16,7 +15,7 @@ jobs:
       PORT: "8003"
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Install sshpass
@@ -24,73 +23,68 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq sshpass
 
-      - name: Configure Apache Server
+      - name: Setup Apache on Server
         run: |
           set -e
 
-          echo '<VirtualHost *:'"$PORT"'>' > /tmp/site.conf
-          echo '    DocumentRoot /home/'"$USER"'/website' >> /tmp/site.conf
-          echo '    DirectoryIndex index.html' >> /tmp/site.conf
-          echo '' >> /tmp/site.conf
-          echo '    <Directory /home/'"$USER"'/website>' >> /tmp/site.conf
-          echo '        Options Indexes FollowSymLinks' >> /tmp/site.conf
-          echo '        AllowOverride None' >> /tmp/site.conf
-          echo '        Require all granted' >> /tmp/site.conf
-          echo '    </Directory>' >> /tmp/site.conf
-          echo '' >> /tmp/site.conf
-          echo '    ErrorLog ${APACHE_LOG_DIR}/website-error.log' >> /tmp/site.conf
-          echo '    CustomLog ${APACHE_LOG_DIR}/website-access.log combined' >> /tmp/site.conf
-          echo '</VirtualHost>' >> /tmp/site.conf
+          # Create virtual host config
+          cat <<EOF > /tmp/site.conf
+<VirtualHost *:${PORT}>
+    DocumentRoot /home/${USER}/website
+    DirectoryIndex index.html
 
+    <Directory /home/${USER}/website>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/website-error.log
+    CustomLog \${APACHE_LOG_DIR}/website-access.log combined
+</VirtualHost>
+EOF
+
+          # Upload config
           sshpass -p "$PASS" scp -o StrictHostKeyChecking=no /tmp/site.conf "$USER@$HOST:/tmp/site.conf"
 
+          # Configure server
           sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no "$USER@$HOST" "
             set -e
 
-            if ! dpkg -s apache2 >/dev/null 2>&1; then
-              echo 'Installing Apache...'
-              echo '$PASS' | sudo -S apt-get update -qq
-              echo '$PASS' | sudo -S apt-get install -y -qq apache2
-            fi
+            echo '$PASS' | sudo -S apt-get update -qq
+            echo '$PASS' | sudo -S apt-get install -y -qq apache2
 
             mkdir -p /home/$USER/website
 
-            sudo sed -i '/Listen 8003/d' /etc/apache2/ports.conf || true
-
+            # Ensure Apache listens on port 8003
             if ! grep -q 'Listen $PORT' /etc/apache2/ports.conf; then
-              echo '$PASS' | sudo -S sh -c 'echo Listen $PORT >> /etc/apache2/ports.conf'
+              echo '$PASS' | sudo -S bash -c 'echo Listen $PORT >> /etc/apache2/ports.conf'
             fi
 
+            # Enable site
             echo '$PASS' | sudo -S mv /tmp/site.conf /etc/apache2/sites-available/site.conf
+            echo '$PASS' | sudo -S a2dissite 000-default.conf || true
+            echo '$PASS' | sudo -S a2ensite site.conf
 
-            if ! [ -L /etc/apache2/sites-enabled/site.conf ]; then
-              echo '$PASS' | sudo -S a2ensite site.conf
-            fi
+            # Open firewall (ignore if ufw not active)
+            echo '$PASS' | sudo -S ufw allow $PORT/tcp || true
 
+            # Check config
             echo '$PASS' | sudo -S apache2ctl configtest
+
+            # Restart Apache
             echo '$PASS' | sudo -S systemctl restart apache2
           "
 
-      - name: Upload Website Files
+      - name: Upload Website Files (ALL files)
         run: |
-          sshpass -p "$PASS" scp -r \
-            -o StrictHostKeyChecking=no \
+          sshpass -p "$PASS" scp -r -o StrictHostKeyChecking=no \
             ./* \
             "$USER@$HOST:/home/$USER/website/"
 
       - name: Verify Deployment
         run: |
-          echo "Checking website..."
-          sleep 3
+          echo "Testing website..."
+          sleep 5
 
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" "http://$HOST:$PORT")
-
-          echo "HTTP Status: $STATUS"
-
-          if [ "$STATUS" != "200" ]; then
-            echo "Deployment failed"
-            exit 1
-          fi
-
-          echo "Website deployed successfully!"
-          echo "http://$HOST:$PORT"
+          curl -v "http://$HOST:$PORT/"
