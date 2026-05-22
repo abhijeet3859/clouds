@@ -12,7 +12,7 @@ jobs:
       HOST: ${{ secrets.SERVER_HOST }}
       USER: ${{ secrets.SERVER_USERNAME }}
       PASS: ${{ secrets.SERVER_PASSWORD }}
-      PORT: "8039"
+      PORT: "8003"
 
     steps:
       - name: Checkout code
