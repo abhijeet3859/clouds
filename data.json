@@ -1,0 +1,12 @@
+{
+  "owner": { "name": "Abhijeet prasad shah", "role": "Developer / Student" },
+  "hero": { "headline": "Hi, I'm Abhijeet prasad shah","sub": "I build modern, accessible and responsive web experiences." },
+  "about": "I am a developer and student passionate about building web applications. I focus on clean UI, accessibility, and learning new technologies.",
+  "skills": ["HTML","CSS","JavaScript","React","Node.js","Git","Responsive Design","Accessibility"],
+  "projects": [
+    { "title": "Project One", "description": "A responsive web app built with modern tooling.", "url": "https://example.com", "tags": ["HTML","CSS","JS"] },
+    { "title": "Project Two", "description": "A small API and frontend demo.", "url": "https://example.com", "tags": ["Node","Express"] },
+    { "title": "Project Three", "description": "A UI component library and docs.", "url": "https://example.com", "tags": ["React","Design"] }
+  ],
+  "contact": { "phone": "+1 555 0100", "email": "register@gmail.com", "address": "123 Main St, City, Country" }
+}
