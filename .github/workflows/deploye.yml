@@ -1,8 +1,9 @@
-name: Deploy Static HTML
+name: Deploy Static Website
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -15,23 +16,30 @@ jobs:
       PORT: "8003"
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Install sshpass
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq sshpass
 
-      - name: Setup Apache Server
+      - name: Configure Apache Server
         run: |
           set -e
 
           echo '<VirtualHost *:'"$PORT"'>' > /tmp/site.conf
           echo '    DocumentRoot /home/'"$USER"'/website' >> /tmp/site.conf
+          echo '    DirectoryIndex index.html' >> /tmp/site.conf
+          echo '' >> /tmp/site.conf
           echo '    <Directory /home/'"$USER"'/website>' >> /tmp/site.conf
           echo '        Options Indexes FollowSymLinks' >> /tmp/site.conf
           echo '        AllowOverride None' >> /tmp/site.conf
           echo '        Require all granted' >> /tmp/site.conf
           echo '    </Directory>' >> /tmp/site.conf
+          echo '' >> /tmp/site.conf
+          echo '    ErrorLog ${APACHE_LOG_DIR}/website-error.log' >> /tmp/site.conf
+          echo '    CustomLog ${APACHE_LOG_DIR}/website-access.log combined' >> /tmp/site.conf
           echo '</VirtualHost>' >> /tmp/site.conf
 
           sshpass -p "$PASS" scp -o StrictHostKeyChecking=no /tmp/site.conf "$USER@$HOST:/tmp/site.conf"
@@ -40,11 +48,14 @@ jobs:
             set -e
 
             if ! dpkg -s apache2 >/dev/null 2>&1; then
+              echo 'Installing Apache...'
               echo '$PASS' | sudo -S apt-get update -qq
               echo '$PASS' | sudo -S apt-get install -y -qq apache2
             fi
 
-            mkdir -p ~/website
+            mkdir -p /home/$USER/website
+
+            sudo sed -i '/Listen 8003/d' /etc/apache2/ports.conf || true
 
             if ! grep -q 'Listen $PORT' /etc/apache2/ports.conf; then
               echo '$PASS' | sudo -S sh -c 'echo Listen $PORT >> /etc/apache2/ports.conf'
@@ -56,14 +67,30 @@ jobs:
               echo '$PASS' | sudo -S a2ensite site.conf
             fi
 
-            echo '$PASS' | sudo -S apache2ctl graceful
+            echo '$PASS' | sudo -S apache2ctl configtest
+            echo '$PASS' | sudo -S systemctl restart apache2
           "
 
-      - name: Upload index.html
+      - name: Upload Website Files
         run: |
-          sshpass -p "$PASS" scp -o StrictHostKeyChecking=no index.html "$USER@$HOST:/home/$USER/website/index.html"
+          sshpass -p "$PASS" scp -r \
+            -o StrictHostKeyChecking=no \
+            ./* \
+            "$USER@$HOST:/home/$USER/website/"
 
       - name: Verify Deployment
         run: |
-          sleep 2
-          curl "http://$HOST:$PORT/"
+          echo "Checking website..."
+          sleep 3
+
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" "http://$HOST:$PORT")
+
+          echo "HTTP Status: $STATUS"
+
+          if [ "$STATUS" != "200" ]; then
+            echo "Deployment failed"
+            exit 1
+          fi
+
+          echo "Website deployed successfully!"
+          echo "http://$HOST:$PORT"
