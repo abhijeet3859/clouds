@@ -5,30 +5,61 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Portfolio — Abhijeet prasad shah</title>
 		<meta name="description" content="Developer & Student portfolio with projects, skills and contact." />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
+		<!-- Preloader -->
+		<div id="preloader" class="preloader">
+			<div class="preloader-content">
+				<div class="spinner"></div>
+				<p>Loading...</p>
+			</div>
+		</div>
+
+		<!-- Header -->
 		<header class="site-header">
 			<div class="container header-inner">
-				<a class="logo" href="#">Abhijeet prasad shah</a>
-				<nav class="nav">
+				<a class="logo" href="#home">Abhijeet prasad shah</a>
+				
+				<button class="mobile-menu-toggle" id="mobile-menu-toggle">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+
+				<nav class="nav" id="nav-menu">
+					<a class="nav-link" href="#home">Home</a>
 					<a class="nav-link" href="#about">About</a>
+					<a class="nav-link" href="#services">Services</a>
 					<a class="nav-link" href="#skills">Skills</a>
+					<a class="nav-link" href="#experience">Experience</a>
 					<a class="nav-link" href="#projects">Projects</a>
+					<a class="nav-link" href="#testimonials">Testimonials</a>
 					<a class="nav-link" href="#contact">Contact</a>
 				</nav>
+
+				<div class="header-actions">
+					<button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
+						<i class="fas fa-moon"></i>
+					</button>
+				</div>
 			</div>
 		</header>
 
 		<main>
-			<section id="hero" class="hero">
+			<!-- Hero Section -->
+			<section id="home" class="hero">
 				<div class="container hero-inner">
 					<div class="hero-content">
-						<span class="eyebrow">Portfolio</span>
-						<h1 id="hero-headline">Hi, I'm a Developer & Student</h1>
-						<p id="hero-sub">I build modern, accessible and responsive web experiences.</p>
+						<span class="eyebrow">Welcome to my portfolio</span>
+						<h1 id="hero-headline" class="typing-effect">Hi, I'm Abhijeet Prasad Shah</h1>
+						<p id="hero-sub" class="hero-subtitle">I'm a <span id="typing-text">Full Stack Developer</span></p>
+						<p class="hero-description">I build modern, accessible and responsive web experiences with cutting-edge technologies.</p>
 						<div class="hero-ctas">
 							<a id="hero-cta" class="btn primary" href="#contact">Get in touch</a>
+
 							<a id="hero-portfolio" class="btn" href="#projects">See projects</a>
 						</div>
 						<div class="hero-stat-grid" id="hero-stats"></div>
@@ -51,15 +82,8 @@
 				</div>
 			</section>
 
-			<section id="highlights" class="highlights">
-				<div class="container">
-					<div class="section-heading"><span>Highlights</span></div>
-					<h2>What makes me unique</h2>
-					<div id="feature-grid" class="feature-grid"></div>
-				</div>
-			</section>
-
-			<section id="about" class="about">
+			<!-- About Section -->
+			<section id="about" class="about" data-aos="fade-up">
 				<div class="container">
 					<div class="section-heading"><span>About</span></div>
 					<h2>About me</h2>
@@ -67,15 +91,38 @@
 				</div>
 			</section>
 
-			<section id="skills" class="skills">
+			<!-- Services Section -->
+			<section id="services" class="services" data-aos="fade-up">
 				<div class="container">
-					<div class="section-heading"><span>Skills</span></div>
-					<h2>What I know</h2>
-					<ul id="skills-list" class="skills-list"></ul>
+					<div class="section-heading"><span>Services</span></div>
+					<h2>What I offer</h2>
+					<div id="services-grid" class="services-grid"></div>
 				</div>
 			</section>
 
-			<section id="projects" class="projects">
+			<!-- Skills Section -->
+			<section id="skills" class="skills" data-aos="fade-up">
+				<div class="container">
+					<div class="section-heading"><span>Skills</span></div>
+					<h2>What I know</h2>
+					<div class="skills-content">
+						<div class="skills-list" id="skills-list"></div>
+						<div class="skills-progress" id="skills-progress"></div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Experience/Education Timeline -->
+			<section id="experience" class="experience" data-aos="fade-up">
+				<div class="container">
+					<div class="section-heading"><span>Experience</span></div>
+					<h2>My Journey</h2>
+					<div class="timeline" id="timeline"></div>
+				</div>
+			</section>
+
+			<!-- Projects Section -->
+			<section id="projects" class="projects" data-aos="fade-up">
 				<div class="container">
 					<div class="section-heading"><span>Projects</span></div>
 					<h2>Selected work</h2>
@@ -85,49 +132,167 @@
 				</div>
 			</section>
 
-			<section id="testimonials" class="testimonials">
+			<!-- Certificates Section -->
+			<section id="certificates" class="certificates" data-aos="fade-up">
 				<div class="container">
-					<div class="section-heading"><span>Testimonials</span></div>
-					<h2>What clients say</h2>
-					<div id="testimonial-grid" class="testimonial-grid"></div>
+					<div class="section-heading"><span>Achievements</span></div>
+					<h2>Certificates & Awards</h2>
+					<div id="certificates-grid" class="certificates-grid"></div>
 				</div>
 			</section>
 
-			<section id="contact" class="contact">
+			<!-- GitHub Stats Section -->
+			<section id="github" class="github-stats" data-aos="fade-up">
+				<div class="container">
+					<div class="section-heading"><span>GitHub</span></div>
+					<h2>GitHub Activity</h2>
+					<div class="github-grid" id="github-stats">
+						<div class="stat-card">
+							<div class="stat-number" data-target="25">0</div>
+							<div class="stat-label">Repositories</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number" data-target="1250">0</div>
+							<div class="stat-label">Contributions</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number" data-target="45">0</div>
+							<div class="stat-label">Followers</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Testimonials Section -->
+			<section id="testimonials" class="testimonials" data-aos="fade-up">
+				<div class="container">
+					<div class="section-heading"><span>Testimonials</span></div>
+					<h2>What clients say</h2>
+					<div class="testimonial-wrapper">
+						<div class="testimonial-carousel" id="testimonial-carousel">
+							<div id="testimonial-grid" class="testimonial-grid"></div>
+						</div>
+						<div class="carousel-controls">
+							<button class="carousel-btn prev" id="testimonial-prev">
+								<i class="fas fa-chevron-left"></i>
+							</button>
+							<button class="carousel-btn next" id="testimonial-next">
+								<i class="fas fa-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section id="contact" class="contact" data-aos="fade-up">
 				<div class="container contact-inner">
 					<div class="contact-card">
 						<div class="section-heading"><span>Contact</span></div>
+						<div class="contact-card-brand">
+							<div class="contact-card-logo">A</div>
+							<div class="contact-card-title">
+								<strong>Abhijeet Prasad Shah</strong>
+								<span>Web Developer</span>
+							</div>
+						</div>
 						<h2>Get in touch</h2>
-						<p><strong>Phone:</strong> <span id="contact-phone"></span></p>
-						<p><strong>Email:</strong> <a id="contact-email" href="mailto:"></a></p>
-						<p><strong>Address:</strong> <span id="contact-address"></span></p>
+						<p class="contact-card-row"><span class="contact-card-icon">📞</span><strong>Phone:</strong> <span id="contact-phone"></span></p>
+						<p class="contact-card-row"><span class="contact-card-icon">✉️</span><strong>Email:</strong> <a id="contact-email" href="mailto:"></a></p>
+						<p class="contact-card-row"><span class="contact-card-icon">📍</span><strong>Address:</strong> <span id="contact-address"></span></p>
+						<div class="contact-social">
+							<span>Follow me</span>
+							<div class="social-links" id="social-links">
+								<a id="github-link" class="social-link" href="#" target="_blank" rel="noreferrer"><i class="fab fa-github"></i> GitHub</a>
+								<a id="facebook-link" class="social-link" href="#" target="_blank" rel="noreferrer"><i class="fab fa-facebook"></i> Facebook</a>
+								<a id="instagram-link" class="social-link" href="#" target="_blank" rel="noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
+								<a id="linkedin-link" class="social-link" href="#" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+								<a id="twitter-link" class="social-link" href="#" target="_blank" rel="noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
+							</div>
+						</div>
 					</div>
-						<form id="contact-form" class="contact-form">
+
+					<form id="contact-form" class="contact-form" novalidate>
+						<div class="form-group">
 							<label>
-								<span>Name</span>
-								<input type="text" id="form-name" required />
+								<span>Name *</span>
+								<input type="text" id="form-name" name="name" required />
+								<span class="error-msg" id="error-name"></span>
 							</label>
+						</div>
+						<div class="form-group">
 							<label>
-								<span>Email</span>
-								<input type="email" id="form-email" required />
+								<span>Email *</span>
+								<input type="email" id="form-email" name="email" required />
+								<span class="error-msg" id="error-email"></span>
 							</label>
+						</div>
+						<div class="form-group">
 							<label>
-								<span>Message</span>
-								<textarea id="form-message" rows="5" required></textarea>
+								<span>Subject *</span>
+								<input type="text" id="form-subject" name="subject" required />
+								<span class="error-msg" id="error-subject"></span>
 							</label>
-							<button id="form-submit" class="btn primary" type="submit">Send</button>
+						</div>
+						<div class="form-group">
+							<label>
+								<span>Message *</span>
+								<textarea id="form-message" name="message" rows="5" required></textarea>
+								<span class="error-msg" id="error-message"></span>
+							</label>
+						</div>
+						<button id="form-submit" class="btn primary" type="submit">Send Message</button>
 						<p id="form-note" class="muted">This demo form won't send messages — use the contact details above.</p>
+						<div id="form-success" class="success-msg" style="display:none;">Message sent successfully!</div>
 					</form>
 				</div>
 			</section>
 		</main>
 
+		<!-- Footer -->
 		<footer class="site-footer">
 			<div class="container">
-				<p>&copy; <span id="current-year"></span> <span id="owner-name">Your Name</span>. Built with ❤️.</p>
+				<div class="footer-content">
+					<div class="footer-section">
+						<h4>Quick Links</h4>
+						<ul>
+							<li><a href="#home">Home</a></li>
+							<li><a href="#projects">Projects</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Services</h4>
+						<ul>
+							<li><a href="#services">Web Development</a></li>
+							<li><a href="#services">UI/UX Design</a></li>
+							<li><a href="#services">Frontend</a></li>
+							<li><a href="#services">Backend</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Follow</h4>
+						<div class="footer-socials">
+							<a href="#" target="_blank"><i class="fab fa-github"></i></a>
+							<a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+							<a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+							<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; <span id="current-year"></span> <span id="owner-name">Your Name</span>. All rights reserved. Built with <i class="fas fa-heart"></i>.</p>
+				</div>
 			</div>
 		</footer>
 
+		<!-- Scroll to Top Button -->
+		<button class="scroll-to-top" id="scroll-to-top" title="Scroll to top">
+			<i class="fas fa-arrow-up"></i>
+		</button>
+
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script src="script.js" defer></script>
 	</body>
 </html>

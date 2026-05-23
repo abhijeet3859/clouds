@@ -1,6 +1,11 @@
 {
   "owner": { "name": "Abhijeet prasad shah", "role": "Developer / Student" },
-  "hero": { "headline": "Hi, I'm Abhijeet prasad shah", "sub": "I build modern, accessible and responsive web experiences." },
+  "hero": { 
+    "headline": "Hi, I'm Abhijeet Prasad Shah",
+    "sub": "I build modern, accessible and responsive web experiences.",
+    "typingTexts": ["Full Stack Developer", "Web Developer", "UI/UX Enthusiast", "Problem Solver"]
+  },
+  "resume": "resume.pdf",
   "heroStats": [
     { "label": "Projects delivered", "value": "25+" },
     { "label": "Happy clients", "value": "12" },
@@ -11,16 +16,153 @@
     { "title": "Smart architecture", "description": "Clean, maintainable code with scalable frontend patterns.", "icon": "🧩" },
     { "title": "Accessible design", "description": "Inclusive layouts and modern interactions for every user.", "icon": "♿" }
   ],
-  "about": "I am a developer and student passionate about building web applications. I focus on clean UI, accessibility, and learning new technologies.",
-  "skills": ["HTML","CSS","JavaScript","React","Node.js","Git","Responsive Design","Accessibility"],
+  "about": "I am a passionate full-stack developer and student dedicated to creating beautiful, functional web applications. I specialize in building responsive, user-friendly interfaces with modern technologies. I love learning new technologies and constantly improving my skills.",
+  "services": [
+    { "title": "Web Development", "description": "Full-stack web development using modern technologies", "icon": "💻" },
+    { "title": "UI/UX Design", "description": "Beautiful and intuitive user interface design", "icon": "🎨" },
+    { "title": "Frontend Development", "description": "React, Vue, and modern JavaScript frameworks", "icon": "⚛️" },
+    { "title": "Backend Development", "description": "Node.js, Express, and database design", "icon": "🚀" },
+    { "title": "API Development", "description": "RESTful and GraphQL API development", "icon": "🔌" },
+    { "title": "Performance Optimization", "description": "Website optimization and speed improvements", "icon": "⚡" }
+  ],
+  "skills": [
+    { "name": "HTML", "level": 95, "icon": "🌐" },
+    { "name": "CSS", "level": 90, "icon": "🎨" },
+    { "name": "JavaScript", "level": 88, "icon": "⚡" },
+    { "name": "React", "level": 85, "icon": "⚛️" },
+    { "name": "Node.js", "level": 82, "icon": "🟢" },
+    { "name": "Express", "level": 80, "icon": "🚂" },
+    { "name": "MongoDB", "level": 78, "icon": "🍃" },
+    { "name": "Git", "level": 88, "icon": "🔀" }
+  ],
+  "experience": [
+    { 
+      "type": "experience",
+      "title": "Senior Frontend Developer", 
+      "company": "Tech Company Inc",
+      "period": "2022 - Present",
+      "description": "Led frontend team in developing scalable React applications. Improved performance by 40%."
+    },
+    { 
+      "type": "experience",
+      "title": "Full Stack Developer", 
+      "company": "Digital Solutions Ltd",
+      "period": "2020 - 2022",
+      "description": "Developed full-stack web applications using MERN stack. Managed databases and server deployment."
+    },
+    {
+      "type": "education",
+      "title": "Bachelor of Technology",
+      "company": "University Name",
+      "period": "2018 - 2022",
+      "description": "Computer Science & Engineering. GPA: 3.8/4.0"
+    },
+    {
+      "type": "education",
+      "title": "Web Development Bootcamp",
+      "company": "Online Learning Platform",
+      "period": "2017 - 2018",
+      "description": "Intensive 12-week bootcamp focusing on full-stack web development"
+    }
+  ],
+  "skills_list": ["HTML","CSS","JavaScript","Node","Express","React","Design"],
   "projects": [
-    { "title": "Project One", "description": "A responsive web app built with modern tooling.", "url": "https://example.com", "tags": ["HTML","CSS","JS"] },
-    { "title": "Project Two", "description": "A small API and frontend demo.", "url": "https://example.com", "tags": ["Node","Express"] },
-    { "title": "Project Three", "description": "A UI component library and docs.", "url": "https://example.com", "tags": ["React","Design"] }
+    { 
+      "title": "E-Commerce Platform", 
+      "description": "Full-stack e-commerce application with payment integration", 
+      "url": "https://example.com", 
+      "tags": ["React", "Node", "MongoDB"],
+      "image": "project1.jpg"
+    },
+    { 
+      "title": "Task Management App", 
+      "description": "Collaborative task management with real-time updates", 
+      "url": "https://example.com", 
+      "tags": ["React", "Firebase"],
+      "image": "project2.jpg"
+    },
+    { 
+      "title": "Portfolio Website", 
+      "description": "Personal portfolio with animations and smooth scrolling", 
+      "url": "https://example.com", 
+      "tags": ["HTML", "CSS", "JavaScript"],
+      "image": "project3.jpg"
+    },
+    { 
+      "title": "Weather Dashboard", 
+      "description": "Real-time weather app with location tracking", 
+      "url": "https://example.com", 
+      "tags": ["JavaScript", "API"],
+      "image": "project4.jpg"
+    },
+    { 
+      "title": "Blog Platform", 
+      "description": "CMS with user authentication and markdown support", 
+      "url": "https://example.com", 
+      "tags": ["Node", "Express", "MongoDB"],
+      "image": "project5.jpg"
+    },
+    { 
+      "title": "Social Network", 
+      "description": "Social platform with messaging and notifications", 
+      "url": "https://example.com", 
+      "tags": ["React", "Node", "Socket.io"],
+      "image": "project6.jpg"
+    }
+  ],
+  "certificates": [
+    { 
+      "title": "Advanced React Development", 
+      "issuer": "Udemy",
+      "date": "2023",
+      "credentialId": "UC-XXXX-XXXX"
+    },
+    { 
+      "title": "Full Stack Web Development", 
+      "issuer": "Coursera",
+      "date": "2022",
+      "credentialId": "GC-XXXX-XXXX"
+    },
+    { 
+      "title": "JavaScript Algorithms & Data Structures", 
+      "issuer": "freeCodeCamp",
+      "date": "2021",
+      "credentialId": "FCC-XXXX-XXXX"
+    },
+    { 
+      "title": "Cloud Computing with AWS", 
+      "issuer": "AWS Academy",
+      "date": "2023",
+      "credentialId": "AWS-XXXX-XXXX"
+    }
   ],
   "testimonials": [
-    { "name": "Rita Sharma", "role": "Product Manager", "quote": "The portfolio is modern, polished, and delivered exactly what we needed." },
-    { "name": "Suresh Thapa", "role": "Startup Founder", "quote": "Abhijeet created a strong, memorable website with great attention to detail." }
+    { 
+      "name": "Rita Sharma", 
+      "role": "Product Manager", 
+      "quote": "The portfolio is modern, polished, and delivered exactly what we needed." 
+    },
+    { 
+      "name": "Suresh Thapa", 
+      "role": "Startup Founder", 
+      "quote": "Abhijeet created a strong, memorable website with great attention to detail." 
+    },
+    { 
+      "name": "Priya Sharma", 
+      "role": "CEO", 
+      "quote": "Outstanding work! Professional, timely, and exceeded all expectations." 
+    }
   ],
-  "contact": { "phone": "+9779816882147", "email": "shahraajabhijeet@gmail.com", "address": "Basbariya Rural municipality, city: Malangwa, country: Nepal" }
+  "contact": { 
+    "phone": "+9779816882147", 
+    "email": "shahraajabhijeet@gmail.com", 
+    "address": "Basbariya Rural municipality, city: Malangwa, country: Nepal" 
+  },
+  "social": {
+    "github": "https://github.com/abhijeet3859",
+    "facebook": "https://www.facebook.com/abhijeetprasadshah",
+    "instagram": "https://www.instagram.com/abhijeetprasadshah",
+    "linkedin": "https://www.linkedin.com/in/abhijeetprasadshah",
+    "twitter": "https://twitter.com/abhijeetprasad"
+  }
 }
