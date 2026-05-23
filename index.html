@@ -12,10 +12,10 @@
 			<div class="container header-inner">
 				<a class="logo" href="#">Abhijeet prasad shah</a>
 				<nav class="nav">
-					<a href="#about">About</a>
-					<a href="#skills">Skills</a>
-					<a href="#projects">Projects</a>
-					<a href="#contact">Contact</a>
+					<a class="nav-link" href="#about">About</a>
+					<a class="nav-link" href="#skills">Skills</a>
+					<a class="nav-link" href="#projects">Projects</a>
+					<a class="nav-link" href="#contact">Contact</a>
 				</nav>
 			</div>
 		</header>
@@ -24,12 +24,14 @@
 			<section id="hero" class="hero">
 				<div class="container hero-inner">
 					<div class="hero-content">
+						<span class="eyebrow">Portfolio</span>
 						<h1 id="hero-headline">Hi, I'm a Developer & Student</h1>
 						<p id="hero-sub">I build modern, accessible and responsive web experiences.</p>
 						<div class="hero-ctas">
 							<a id="hero-cta" class="btn primary" href="#contact">Get in touch</a>
 							<a id="hero-portfolio" class="btn" href="#projects">See projects</a>
 						</div>
+						<div class="hero-stat-grid" id="hero-stats"></div>
 					</div>
 					<div class="hero-media" id="hero-media">
 						<div class="hero-card">
@@ -46,6 +48,14 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</section>
+
+			<section id="highlights" class="highlights">
+				<div class="container">
+					<div class="section-heading"><span>Highlights</span></div>
+					<h2>What makes me unique</h2>
+					<div id="feature-grid" class="feature-grid"></div>
 				</div>
 			</section>
 
@@ -69,7 +79,17 @@
 				<div class="container">
 					<div class="section-heading"><span>Projects</span></div>
 					<h2>Selected work</h2>
+					<p class="project-copy">Filter projects by skill and explore the work that defines my style.</p>
+					<div id="project-filters" class="project-filters"></div>
 					<div id="projects-grid" class="projects-grid"></div>
+				</div>
+			</section>
+
+			<section id="testimonials" class="testimonials">
+				<div class="container">
+					<div class="section-heading"><span>Testimonials</span></div>
+					<h2>What clients say</h2>
+					<div id="testimonial-grid" class="testimonial-grid"></div>
 				</div>
 			</section>
 
@@ -82,20 +102,20 @@
 						<p><strong>Email:</strong> <a id="contact-email" href="mailto:"></a></p>
 						<p><strong>Address:</strong> <span id="contact-address"></span></p>
 					</div>
-					<form id="contact-form" class="contact-form" onsubmit="return false;">
-						<label>
-							<span>Name</span>
-							<input type="text" id="form-name" required />
-						</label>
-						<label>
-							<span>Email</span>
-							<input type="email" id="form-email" required />
-						</label>
-						<label>
-							<span>Message</span>
-							<textarea id="form-message" rows="5" required></textarea>
-						</label>
-						<button id="form-submit" class="btn primary">Send</button>
+						<form id="contact-form" class="contact-form">
+							<label>
+								<span>Name</span>
+								<input type="text" id="form-name" required />
+							</label>
+							<label>
+								<span>Email</span>
+								<input type="email" id="form-email" required />
+							</label>
+							<label>
+								<span>Message</span>
+								<textarea id="form-message" rows="5" required></textarea>
+							</label>
+							<button id="form-submit" class="btn primary" type="submit">Send</button>
 						<p id="form-note" class="muted">This demo form won't send messages — use the contact details above.</p>
 					</form>
 				</div>
@@ -104,7 +124,7 @@
 
 		<footer class="site-footer">
 			<div class="container">
-				<p>&copy; <span id="owner-name">Your Name</span>. Built with ❤️.</p>
+				<p>&copy; <span id="current-year"></span> <span id="owner-name">Your Name</span>. Built with ❤️.</p>
 			</div>
 		</footer>
 
