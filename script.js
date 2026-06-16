@@ -16,17 +16,24 @@ function setupThemeToggle() {
   const htmlElement = document.documentElement;
   const savedTheme = localStorage.getItem('theme') || 'dark';
   
-  if (savedTheme === 'light') {
+  // Apply saved theme: add or remove the class and set the correct icon
+  if (savedTheme === 'dark') {
     htmlElement.classList.add('dark-mode');
     themeToggle?.querySelector('i')?.classList.replace('fa-moon', 'fa-sun');
+  } else {
+    htmlElement.classList.remove('dark-mode');
+    themeToggle?.querySelector('i')?.classList.replace('fa-sun', 'fa-moon');
   }
-  
+
   themeToggle?.addEventListener('click', () => {
     htmlElement.classList.toggle('dark-mode');
     const isDark = htmlElement.classList.contains('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    themeToggle.querySelector('i').classList.toggle('fa-moon');
-    themeToggle.querySelector('i').classList.toggle('fa-sun');
+    const icon = themeToggle.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-moon');
+      icon.classList.toggle('fa-sun');
+    }
   });
 }
 
@@ -40,7 +47,7 @@ function setupMobileMenu() {
     navMenu?.classList.toggle('active');
   });
   
-  navMenu?.querySelectorAll('.nav-link').forEach(link => {
+  navMenu?.querySelectorAll('.nav-link')?.forEach(link => {
     link.addEventListener('click', () => {
       toggle?.classList.remove('active');
       navMenu?.classList.remove('active');
